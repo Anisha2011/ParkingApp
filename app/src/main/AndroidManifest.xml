@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.searchfuntionality">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SearchFuntionality">
+        <activity
+            android:name=".Wallet"
+            android:exported="false" />
+        <activity
+            android:name=".VehicleInfo"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileView"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".Booking"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -23,8 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

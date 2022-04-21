@@ -39,6 +39,17 @@ class Parking : AppCompatActivity() {
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1,location)
         listView.adapter = arrayAdapter
 
+        val context = this
+        listView.setOnItemClickListener { _, _, position, _ ->
+            // 1
+            val selectedLocation = location[position]
+
+            // 2
+            val bookingIntent = Booking.newIntent(context, selectedLocation)
+
+            // 3
+            startActivity(bookingIntent)
+        }
 
     }
 }

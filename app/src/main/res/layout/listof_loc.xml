@@ -12,8 +12,6 @@
       android:id="@+id/listof_loc"
       android:text="location text view"
       android:textSize="26sp"
-
-
       />
 
 </LinearLayout>
