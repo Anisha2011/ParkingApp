@@ -5,18 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.searchfuntionality.dto.Result
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 class LoginActivity : AppCompatActivity() {
@@ -34,31 +30,36 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
+
+
     fun login(userName: String, password: String) {
-        getUsers()
-        if (userName == userData?.user_email ?: "name" && password == userData?.user_password ?: "1234" ) {
+//        getLogin(userName, password)
+        if (userName == userData?.email ?: "name" && password == userData?.password ?: "1234" ) {
             startActivity(Intent(this, Dashboard::class.java))
             Toast.makeText(this, "Login Success!", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
         }
     }
+    fun onclickac(view: View) {
+        startActivity(Intent(this, SignUp::class.java))
+    }
 
-    private fun getUsers() {
-        val call: Call<List<Result>> = RetrofitClient.getInstance().myApi.getusers()
-        call.enqueue(object : Callback<List<Result>> {
-           override fun onResponse(call: Call<List<Result>>, response: Response<List<Result>>) {
-                val myuserList: List<Result> = response.body() as List<Result>
+    private fun getLogin(email: String, password: String) {
+        val call: Call<Result> = RetrofitClient.getInstance().myApi.getlogin(email, password)
+        call.enqueue(object : Callback<Result> {
+           override fun onResponse(call: Call<Result>, response: Response<Result>) {
+                val user: Result = response.body() as Result
                val gson = Gson()
-               val json = gson.toJson(myuserList[0])
+               val json = gson.toJson(user)
                Log.i(TAG, json)
                userData = Result()
-               userData!!.user_email = myuserList[0].user_email
-               userData!!.user_password = myuserList[0].user_password
+               userData!!.email = user.email
+               userData!!.password = user.password
             }
 
 
-            override fun onFailure(call: Call<List<Result>>, t: Throwable) {
+            override fun onFailure(call: Call<Result>, t: Throwable) {
                 Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
             }
         })

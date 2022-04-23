@@ -11,46 +11,56 @@
     <TextView
         android:id="@+id/vdetails"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
         android:text="VEHICLE DETAILS"
-        android:textColor=" #7f00ff"
-        android:textSize="30dp" />
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/vname"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="20"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        android:background="#20ffffff"
+        android:ems="15"
+        android:fontFamily="sans-serif"
         android:hint="Vehicle Name"
         android:inputType="text"
-        android:textColorHint="@color/white"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="#777777"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/vnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
-        android:ems="20"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+        android:background="#20ffffff"
+        android:ems="15"
         android:hint="Vehicle Number"
+        android:padding="20dp"
         android:inputType="text"
-        android:textColorHint="@color/white"
-         />
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="#777777" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="250dp"
-        android:backgroundTint="#7f00ff"
+        android:layout_marginTop="450dp"
+       android:background="@drawable/buttonn"
+        android:layout_centerHorizontal="true"
+        android:ems="11"
+        android:padding="11dp"
         android:text="@string/btn"
-    />
+        android:textSize="20sp" />
 
 
 

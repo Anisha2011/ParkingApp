@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SearchFuntionality">
         <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
             android:name=".Wallet"
             android:exported="false" />
         <activity
