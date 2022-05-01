@@ -16,7 +16,6 @@ import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
-    private var userData : Result? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,35 +29,43 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
+    fun onclickac(view: View) {
+        startActivity(Intent(this, SignUp::class.java))
+    }
 
 
     fun login(userName: String, password: String) {
-//        getLogin(userName, password)
-        if (userName == userData?.email ?: "name" && password == userData?.password ?: "1234" ) {
-            startActivity(Intent(this, Dashboard::class.java))
-            Toast.makeText(this, "Login Success!", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
-        }
-    }
-    fun onclickac(view: View) {
-        startActivity(Intent(this, SignUp::class.java))
+        getLogin(userName, password)
     }
 
     private fun getLogin(email: String, password: String) {
         val call: Call<Result> = RetrofitClient.getInstance().myApi.getlogin(email, password)
         call.enqueue(object : Callback<Result> {
            override fun onResponse(call: Call<Result>, response: Response<Result>) {
-                val user: Result = response.body() as Result
-               val gson = Gson()
-               val json = gson.toJson(user)
-               Log.i(TAG, json)
-               userData = Result()
-               userData!!.email = user.email
-               userData!!.password = user.password
-            }
+               if (response.isSuccessful()) {
+                   if (response.body() != null) {
+                       val user: Result = response.body() as Result
 
+                       //login start main activity
+                       startActivity(Intent(applicationContext, Dashboard::class.java))
+//                       intent.putExtra("userid", user.id);
+//                       startActivity(intent);
 
+                   } else {
+                       Toast.makeText(
+                           applicationContext,
+                           "The username or password is incorrect",
+                           Toast.LENGTH_SHORT
+                       ).show();
+                   }
+               } else {
+                   Toast.makeText(
+                       applicationContext,
+                       "Error! Please try again!",
+                       Toast.LENGTH_SHORT
+                   ).show();
+               }
+           }
             override fun onFailure(call: Call<Result>, t: Throwable) {
                 Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
             }

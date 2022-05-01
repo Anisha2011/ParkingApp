@@ -1,7 +1,9 @@
 package com.example.searchfuntionality;
 
+import com.example.searchfuntionality.dto.Bookingdto;
 import com.example.searchfuntionality.dto.Parkingdto;
 import com.example.searchfuntionality.dto.Result;
+import com.example.searchfuntionality.dto.Slots;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public interface Api {
     @GET("Parking")
     Call<List<Parkingdto>> getparking();
 
-    @GET("/Login/{email}/{password}")
+    @GET("Login/{email}/{password}")
     Call<Result> getlogin(
             @Path("email") String email,
             @Path("password") String password
@@ -29,4 +31,11 @@ public interface Api {
     @POST("UserParking/User")
     Call<Result> createPost(@Body Result result);
 
+    @GET("ParkingSlots/{ParkingId}")
+    Call<List<Slots>> getparkingslots(
+            @Path("ParkingId") int parkingId
+    );
+
+    @POST("/Booking/ConfirmBooking")
+    Call<String> confirmBooking(@Body Bookingdto bookingdto);
 }
