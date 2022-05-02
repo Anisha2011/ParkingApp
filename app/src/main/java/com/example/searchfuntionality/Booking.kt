@@ -24,12 +24,16 @@ class Booking : AppCompatActivity()
         const val EXTRA_PARKING = "loc"
         const val EXTRA_SLOT = "s"
         const val EXTRA_CHARGE = "c"
+        const val EXTRA_USER = "u"
+        const val EXTRA_PARKINGID = "id"
 
-        fun newIntent(context: Context, parking: String,slot : String , charge : String): Intent {
+        fun newIntent(context: Context, parking: String,slot : String , charge : String,user: String, parkingid: String): Intent {
             val detailIntent = Intent(context, Booking::class.java)
             detailIntent.putExtra(EXTRA_PARKING, parking)
             detailIntent.putExtra(EXTRA_SLOT, slot)
             detailIntent.putExtra(EXTRA_CHARGE, charge)
+            detailIntent.putExtra(EXTRA_USER, user)
+            detailIntent.putExtra(EXTRA_PARKINGID, parkingid)
             return detailIntent
         }
     }
@@ -39,6 +43,13 @@ class Booking : AppCompatActivity()
         val selectedslot = intent.extras?.getString(Booking.EXTRA_SLOT)
         val selectedparking = intent.extras?.getString(Booking.EXTRA_PARKING)
         val selectedcharge = intent.extras?.getString(Booking.EXTRA_CHARGE)
+        val selecteduser = intent.extras?.getString(Booking.EXTRA_USER)
+        val selectedparkingid = intent.extras?.getString(Booking.EXTRA_PARKINGID)
+
+
+
+        var user = selecteduser?.toInt()
+        var parking = selectedparkingid?.toInt()
 
         val showButton = findViewById<Button>(R.id.okbtn)
         val slotText = findViewById<TextView>(R.id.slotId)
@@ -51,11 +62,18 @@ class Booking : AppCompatActivity()
 
 
         showButton.setOnClickListener {
-//            val bookingdto : Bookingdto = Bookingdto(
-//
-//            )
-//            confirmBooking()
 
+            if (user != null && parking != null)
+            {
+                Log.i(ContentValues.TAG, parking.toString())
+                Log.i(ContentValues.TAG, user.toString())
+
+                val bookingdto : Bookingdto = Bookingdto(parking,user)
+                val gson = Gson()
+                val json = gson.toJson(bookingdto)
+                Log.i(ContentValues.TAG, json)
+                confirmBooking(bookingdto)
+            }
         }
     }
     private fun confirmBooking(bookingdto: Bookingdto) {

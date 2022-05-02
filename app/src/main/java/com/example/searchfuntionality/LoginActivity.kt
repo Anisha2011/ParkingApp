@@ -45,20 +45,18 @@ class LoginActivity : AppCompatActivity() {
                if (response.isSuccessful()) {
                    if (response.body() != null) {
                        val user: Result = response.body() as Result
-
-                       //login start main activity
-                       startActivity(Intent(applicationContext, Dashboard::class.java))
-//                       intent.putExtra("userid", user.id);
-//                       startActivity(intent);
-
-                   } else {
+                       val dashboardIntent = Dashboard.newIntent(applicationContext , user.id.toString())
+                       startActivity(dashboardIntent);
+                   }
+                   else {
                        Toast.makeText(
                            applicationContext,
                            "The username or password is incorrect",
                            Toast.LENGTH_SHORT
                        ).show();
                    }
-               } else {
+               }
+               else {
                    Toast.makeText(
                        applicationContext,
                        "Error! Please try again!",

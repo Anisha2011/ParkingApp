@@ -36,6 +36,6 @@ public interface Api {
             @Path("ParkingId") int parkingId
     );
 
-    @POST("/Booking/ConfirmBooking")
+    @POST("Booking/ConfirmBooking")
     Call<String> confirmBooking(@Body Bookingdto bookingdto);
 }

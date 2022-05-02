@@ -27,12 +27,14 @@ class Parking : AppCompatActivity() {
         const val EXTRA_PARKING = "p"
         const val EXTRA_CHARGE = "c"
         const val EXTRA_LOCATION = "loc"
+        const val EXTRA_USER = "u"
 
-        fun newIntent(context: Context, location: String, name: String, charge: String): Intent {
+        fun newIntent(context: Context, location: String, name: String, charge: String, user: String): Intent {
             val detailIntent = Intent(context, Parking::class.java)
             detailIntent.putExtra(EXTRA_LOCATION, location)
             detailIntent.putExtra(EXTRA_PARKING, name)
             detailIntent.putExtra(EXTRA_CHARGE, charge)
+            detailIntent.putExtra(EXTRA_USER, user)
             return detailIntent
         }
     }
@@ -45,6 +47,7 @@ class Parking : AppCompatActivity() {
         val selectedlocation = intent.extras?.getString(EXTRA_LOCATION)
         val selectedparking = intent.extras?.getString(EXTRA_PARKING)
         val selectedcharge = intent.extras?.getString(EXTRA_CHARGE)
+        val selecteduser = intent.extras?.getString(EXTRA_USER)
         var pId = selectedlocation?.toInt()
         if (pId != null) {
             val gson = Gson()
@@ -60,9 +63,10 @@ class Parking : AppCompatActivity() {
         val context = this
         listView.setOnItemClickListener { _, _, position, _ ->
             val s = Slist[position]
-            if(selectedparking != null && selectedcharge != null){
+            if(selectedparking != null && selectedcharge != null && selecteduser != null){
                 Log.i(ContentValues.TAG, "yes")
-                val bookingIntent = Booking.newIntent(context,selectedparking, s, selectedcharge)
+                val bookingIntent = Booking.newIntent(context,selectedparking, s, selectedcharge, selecteduser,
+                    pId.toString())
                 startActivity(bookingIntent)
             }
         }

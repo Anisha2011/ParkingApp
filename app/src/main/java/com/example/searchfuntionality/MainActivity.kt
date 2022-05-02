@@ -1,6 +1,8 @@
 package com.example.searchfuntionality
 
 import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +20,17 @@ class MainActivity : AppCompatActivity() {
     var parkingList: List<Parkingdto> = ArrayList()
     var arrayAdapter: ArrayAdapter<String>? = null
     lateinit var etSearch: EditText
+
+    companion object {
+        const val EXTRA_USER = "u"
+
+        fun newIntent(context: Context, user: String): Intent {
+            val detailIntent = Intent(context, MainActivity::class.java)
+            detailIntent.putExtra(EXTRA_USER, user)
+            return detailIntent
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,8 +55,12 @@ class MainActivity : AppCompatActivity() {
             for (parkingdto in parkingList) {
 
                if(parkingdto.name == selecteditem ){
-                   val parkingIntent = Parking.newIntent(context, parkingdto.parking_id.toString(),parkingdto.name,
-                   parkingdto.charge.toString())
+                   val userid = intent.extras?.getString(MainActivity.EXTRA_USER)
+                   val parkingIntent = userid?.let {
+                       Parking.newIntent(context, parkingdto.parking_id.toString(),parkingdto.name,
+                           parkingdto.charge.toString(), it
+                       )
+                   }
                    startActivity(parkingIntent)
                }
             }
