@@ -4,6 +4,7 @@ import com.example.searchfuntionality.dto.Bookingdto;
 import com.example.searchfuntionality.dto.Parkingdto;
 import com.example.searchfuntionality.dto.Result;
 import com.example.searchfuntionality.dto.Slots;
+import com.example.searchfuntionality.dto.Walletdto;
 
 import java.util.List;
 
@@ -38,4 +39,9 @@ public interface Api {
 
     @POST("Booking/ConfirmBooking")
     Call<String> confirmBooking(@Body Bookingdto bookingdto);
+
+    @GET("UserWallet/{UserId}")
+    Call<Walletdto> getwallet(
+            @Path("UserId")int userId
+    );
 }

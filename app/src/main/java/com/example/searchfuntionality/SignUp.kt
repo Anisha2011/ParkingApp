@@ -51,7 +51,7 @@ class SignUp : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Result>, t: Throwable) {
-                Toast.makeText(applicationContext, "Signup failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "SignUP failed", Toast.LENGTH_SHORT).show()
             }
         })
     }

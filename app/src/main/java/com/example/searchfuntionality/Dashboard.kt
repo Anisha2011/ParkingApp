@@ -35,6 +35,8 @@ class Dashboard : AppCompatActivity() {
         startActivity(Intent(this, VehicleInfo::class.java))
     }
     fun onclickWallet(view: View) {
-        startActivity(Intent(this, Wallet::class.java))
+        val UserId = intent.extras?.getString(Dashboard.EXTRA_USER)
+            val walletActivityIntent = UserId?.let {Wallet.newIntent(applicationContext , it) }
+        startActivity(walletActivityIntent);
     }
 }
