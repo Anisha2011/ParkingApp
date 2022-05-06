@@ -45,7 +45,8 @@ class LoginActivity : AppCompatActivity() {
                if (response.isSuccessful()) {
                    if (response.body() != null) {
                        val user: Result = response.body() as Result
-                       val dashboardIntent = Dashboard.newIntent(applicationContext , user.id.toString())
+                       val dashboardIntent = Dashboard.newIntent(applicationContext , user.id.toString(),
+                           user.name, user.contact.toString())
                        startActivity(dashboardIntent);
                    }
                    else {

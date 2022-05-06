@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.searchfuntionality.dto.BookingEntity
 import com.example.searchfuntionality.dto.Bookingdto
 import com.example.searchfuntionality.dto.Parkingdto
 import com.example.searchfuntionality.dto.Slots
@@ -48,8 +49,9 @@ class Booking : AppCompatActivity()
 
 
 
-        var user = selecteduser?.toInt()
-        var parking = selectedparkingid?.toInt()
+        val  user = selecteduser?.toInt()
+        val parking = selectedparkingid?.toInt()
+        val slot = selectedslot?.toInt()
 
         val showButton = findViewById<Button>(R.id.okbtn)
         val slotText = findViewById<TextView>(R.id.slotId)
@@ -63,12 +65,12 @@ class Booking : AppCompatActivity()
 
         showButton.setOnClickListener {
 
-            if (user != null && parking != null)
+            if (user != null && parking != null && slot != null)
             {
                 Log.i(ContentValues.TAG, parking.toString())
                 Log.i(ContentValues.TAG, user.toString())
 
-                val bookingdto : Bookingdto = Bookingdto(parking,user)
+                val bookingdto : Bookingdto = Bookingdto(parking,user,slot)
                 val gson = Gson()
                 val json = gson.toJson(bookingdto)
                 Log.i(ContentValues.TAG, json)
@@ -77,14 +79,14 @@ class Booking : AppCompatActivity()
         }
     }
     private fun confirmBooking(bookingdto: Bookingdto) {
-       val call: Call<String> = RetrofitClient.getInstance().myApi.confirmBooking(bookingdto)
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+       val call: Call<BookingEntity> = RetrofitClient.getInstance().myApi.confirmBooking(bookingdto)
+        call.enqueue(object : Callback<BookingEntity> {
+            override fun onResponse(call: Call<BookingEntity>, response: Response<BookingEntity>) {
                 if(response.body() == null) return
-                val res  = response.body() as String
+                val res  = response.body() as BookingEntity
                 Toast.makeText(applicationContext, "Booking Successful", Toast.LENGTH_SHORT).show()
             }
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<BookingEntity>, t: Throwable) {
                 Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
             }
         })

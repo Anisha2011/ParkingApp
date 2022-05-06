@@ -28,7 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".VehicleInfo"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ProfileView"
             android:exported="false" />
@@ -37,10 +37,10 @@
             android:exported="false" />
         <activity
             android:name=".Booking"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Parking"
             android:exported="false" />

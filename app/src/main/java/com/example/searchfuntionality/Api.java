@@ -1,5 +1,6 @@
 package com.example.searchfuntionality;
 
+import com.example.searchfuntionality.dto.BookingEntity;
 import com.example.searchfuntionality.dto.Bookingdto;
 import com.example.searchfuntionality.dto.Parkingdto;
 import com.example.searchfuntionality.dto.Result;
@@ -38,10 +39,11 @@ public interface Api {
     );
 
     @POST("Booking/ConfirmBooking")
-    Call<String> confirmBooking(@Body Bookingdto bookingdto);
+    Call<BookingEntity> confirmBooking(@Body Bookingdto bookingdto);
 
     @GET("UserWallet/{UserId}")
     Call<Walletdto> getwallet(
             @Path("UserId")int userId
     );
+
 }

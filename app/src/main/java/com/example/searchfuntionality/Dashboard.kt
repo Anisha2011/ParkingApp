@@ -10,11 +10,15 @@ import android.widget.EditText
 class Dashboard : AppCompatActivity() {
     companion object {
         const val EXTRA_USER = "u"
+        const val  EXTRA_USERNAME = "uname"
+        const val EXTRA_CONTACT = "ct"
 
 
-        fun newIntent(context: Context, user: String): Intent {
+        fun newIntent(context: Context, user: String, username:String, contact:String ): Intent {
             val detailIntent = Intent(context, Dashboard::class.java)
             detailIntent.putExtra(EXTRA_USER, user)
+            detailIntent.putExtra(EXTRA_USERNAME, username)
+            detailIntent.putExtra(EXTRA_CONTACT, contact)
             return detailIntent
         }
     }
@@ -29,7 +33,14 @@ class Dashboard : AppCompatActivity() {
         startActivity(mainActivityIntent);
     }
     fun onclickProfile(view: View) {
-        startActivity(Intent(this, ProfileView::class.java))
+            val userid = intent.extras?.getString(Dashboard.EXTRA_USER)
+            val username = intent.extras?.getString(Dashboard.EXTRA_USERNAME)
+            val contact = intent.extras?.getString(Dashboard.EXTRA_CONTACT)
+
+          if (userid != null && username != null && contact != null){
+              val profileViewIntent = ProfileView.newIntent(applicationContext , userid,username,contact)
+              startActivity(profileViewIntent);
+          }
     }
     fun onclickVeh(view: View) {
         startActivity(Intent(this, VehicleInfo::class.java))

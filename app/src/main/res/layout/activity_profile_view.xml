@@ -7,22 +7,37 @@
     android:background="@color/black"
     tools:context=".ProfileView">
 
-    <EditText
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/uname"
-        android:text="USERNAME"
+        android:id="@+id/uname2"
         android:textColor="@color/white"
         android:textSize="30dp"
-
+        android:text="UserId "
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         />
-    <EditText
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uct"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/uid"
-        android:layout_below="@+id/uname"
-        android:text="USER ID"
         android:textColor="@color/white"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        />
+
 
 </RelativeLayout>
