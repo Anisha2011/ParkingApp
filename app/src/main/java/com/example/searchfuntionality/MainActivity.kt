@@ -1,12 +1,11 @@
 package com.example.searchfuntionality
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.searchfuntionality.dto.Parkingdto
@@ -15,6 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    val CUSTOM_PREF_NAME = "User_data"
     lateinit var listView: ListView
     var location: ArrayList<String> = ArrayList()
     var parkingList: List<Parkingdto> = ArrayList()
@@ -66,6 +67,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
     private fun getParking() {
         val call: Call<List<Parkingdto>> = RetrofitClient.getInstance().myApi.getparking()
         call.enqueue(object : Callback<List<Parkingdto>> {
@@ -83,3 +87,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 }
+

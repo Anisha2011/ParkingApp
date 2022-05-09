@@ -35,7 +35,4 @@ public class Walletdto {
         this.balance = balance;
     }
 
-
-
-
 }

@@ -1,15 +1,13 @@
 package com.example.searchfuntionality
 
-import android.content.ContentValues.TAG
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.searchfuntionality.dto.Result
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,11 +15,17 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         //val loginbtn = findViewById<Button>(R.id.loginbtn)
     }
+
+    override fun onBackPressed() {
+        this.moveTaskToBack(true)
+    }
+
     fun onclick(view: View) {
         login(
             findViewById<EditText>(R.id.username).text.toString(),

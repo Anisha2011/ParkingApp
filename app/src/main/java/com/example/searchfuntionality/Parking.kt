@@ -4,11 +4,13 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import com.example.searchfuntionality.dto.Parkingdto
 import com.example.searchfuntionality.dto.Slots
@@ -44,33 +46,35 @@ class Parking : AppCompatActivity() {
         setContentView(R.layout.activity_parking)
 
         listView = findViewById(R.id.listView)
+
+//        var color = getResources().getColor(R.color.black)
+//        listView.setBackgroundColor(color)
+//
+//        TextView tv = (TextView)view.findViewById(android.R.id.listof_loc)
+//        tv.setTextColor(Color.WHITE)
+
+
         val selectedlocation = intent.extras?.getString(EXTRA_LOCATION)
         val selectedparking = intent.extras?.getString(EXTRA_PARKING)
         val selectedcharge = intent.extras?.getString(EXTRA_CHARGE)
         val selecteduser = intent.extras?.getString(EXTRA_USER)
         var pId = selectedlocation?.toInt()
         if (pId != null) {
-            val gson = Gson()
-            val json = gson.toJson(pId)
-            Log.i(TAG, json)
             getParkingslots(pId)
         }
-
-        arrayAdapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, Slist)
-        listView.adapter = arrayAdapter
 
         val context = this
         listView.setOnItemClickListener { _, _, position, _ ->
             val s = Slist[position]
             if(selectedparking != null && selectedcharge != null && selecteduser != null){
-                Log.i(ContentValues.TAG, "yes")
                 val bookingIntent = Booking.newIntent(context,selectedparking, s, selectedcharge, selecteduser,
                     pId.toString())
                 startActivity(bookingIntent)
             }
         }
     }
+
+
     private fun getParkingslots(parkingId: Int) {
         val call: Call<List<Slots>> = RetrofitClient.getInstance().myApi.getparkingslots(parkingId)
         call.enqueue(object : Callback<List<Slots>> {
@@ -80,15 +84,17 @@ class Parking : AppCompatActivity() {
 
                 slotList.forEach {
                     Slist.add(it.number)
-                    val gson = Gson()
-                    val json = gson.toJson(it.id)
-                    Log.i(TAG, json)
                 }
+                writeListView(Slist)
             }
-
             override fun onFailure(call: Call<List<Slots>>, t: Throwable) {
                 Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
             }
         })
+    }
+    private fun writeListView(Slist: List<String>) {
+        arrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, Slist)
+        listView.adapter = arrayAdapter
     }
 }

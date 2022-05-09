@@ -38,4 +38,7 @@ class ProfileView : AppCompatActivity() {
         txView.text = selectedcontact
 
     }
+
+
+
 }

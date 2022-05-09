@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Booking">
+    tools:context=".Booking"
+    >
 
     <TextView
         android:id="@+id/slotId"
@@ -16,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="SLOT ID"
-        android:textColor="@color/black"/>
+       />
 
     <TextView
         android:id="@+id/pname"
@@ -24,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/slotId"
         android:text="PARKING NAME"
-        android:textColor="@color/black"
         android:layout_margin="20dp"
        />
 
@@ -35,10 +35,8 @@
         android:layout_below="@+id/pname"
         android:layout_margin="20dp"
         android:text="PAY "
-        android:textColor="@color/black"
         />
 
-    <!--Button with id showInput-->
 
     <Button
         android:id="@+id/okbtn"
@@ -47,7 +45,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
         android:text="CONFIRM"
-        android:textColor="@android:color/white" />
+        />
 
 
 

@@ -23,7 +23,7 @@ class Wallet : AppCompatActivity() {
         const val EXTRA_USER = "u"
 
         fun newIntent(context: Context,  user: String): Intent {
-            val detailIntent = Intent(context, Parking::class.java)
+            val detailIntent = Intent(context, Wallet::class.java)
             detailIntent.putExtra(EXTRA_USER, user)
             return detailIntent
         }
@@ -33,12 +33,16 @@ class Wallet : AppCompatActivity() {
         setContentView(R.layout.activity_wallet)
         textView = findViewById<TextView>(R.id.balance)
 
-        val selectedId = intent.extras?.getString(Parking.EXTRA_USER)
+        val selectedId = intent.extras?.getString(Wallet.EXTRA_USER)
         val userId= selectedId?.toInt()
+        val gson = Gson()
+        val json = gson.toJson(userId)
+        Log.i(ContentValues.TAG, json)
         if (userId != null) {
             getwallet(userId)
         }
     }
+
     private fun getwallet(userId: Int) {
             val call: Call<Walletdto> = RetrofitClient.getInstance().myApi.getwallet(userId)
         call.enqueue(object : Callback<Walletdto> {

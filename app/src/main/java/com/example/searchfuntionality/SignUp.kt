@@ -20,6 +20,8 @@ class SignUp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
     }
+
+
     fun onclicksu(view: View) {
         val uname = findViewById<EditText>(R.id.uname).text.toString()
         val unumm = findViewById<EditText>(R.id.unumm).text.toString()

@@ -27,6 +27,8 @@ class Dashboard : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard)
 
     }
+
+
     fun onclick(view: View) {
         val userid = intent.extras?.getString(Dashboard.EXTRA_USER)
         val mainActivityIntent = userid?.let { MainActivity.newIntent(applicationContext , it) }

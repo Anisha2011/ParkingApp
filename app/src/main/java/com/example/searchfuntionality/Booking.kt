@@ -78,6 +78,8 @@ class Booking : AppCompatActivity()
             }
         }
     }
+
+
     private fun confirmBooking(bookingdto: Bookingdto) {
        val call: Call<BookingEntity> = RetrofitClient.getInstance().myApi.confirmBooking(bookingdto)
         call.enqueue(object : Callback<BookingEntity> {
